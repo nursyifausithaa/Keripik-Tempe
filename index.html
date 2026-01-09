@@ -127,6 +127,8 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.1);
             transition: transform 0.3s;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
@@ -152,10 +154,18 @@
 
         .product-info {
             padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
         }
 
         .product-info h3 {
             color: #8b6f47;
+            margin-bottom: 0.5rem;
+        }
+
+        .product-info p {
+            flex-grow: 1;
             margin-bottom: 0.5rem;
         }
 
@@ -164,6 +174,10 @@
             color: #d4a574;
             font-weight: bold;
             margin: 1rem 0;
+        }
+
+        .product-info .btn {
+            margin-top: auto;
         }
 
         .features {
@@ -280,7 +294,7 @@
 <body>
     <header>
         <nav>
-            <div class="logo"> Keripik Tempe Renyah</div>
+            <div class="logo">🥢 Keripik Tempe Renyah</div>
             <ul class="nav-links">
                 <li><a href="#home">Beranda</a></li>
                 <li><a href="#products">Produk</a></li>
@@ -411,37 +425,11 @@
 
     <footer>
         <p>&copy; 2026 Keripik Tempe Renyah. Semua hak dilindungi.</p>
-        <div class="social-links">
-            <a href="#" title="WhatsApp"></a>
-            <a href="#" title="Instagram"></a>
-            <a href="#" title="Facebook"></a>
-        </div>
+
         <p style="margin-top: 1rem;">📍 Tanjung Pura, Sumatera Utara | 📞 0812-6467-6310</p>
     </footer>
 
     <script>
-        // Load images from uploaded files
-        async function loadImages() {
-            const imageFiles = [
-                'image1.jpg',
-                'image2.jpg', 
-                'image3.jpg',
-                'image4.jpg'
-            ];
-
-            for (let i = 0; i < imageFiles.length; i++) {
-                try {
-                    const data = await window.fs.readFile(imageFiles[i]);
-                    const blob = new Blob([data], { type: 'image/jpeg' });
-                    const url = URL.createObjectURL(blob);
-                    document.getElementById(`img${i + 1}`).src = url;
-                } catch (error) {
-                    console.error(`Error loading ${imageFiles[i]}:`, error);
-                }
-            }
-        }
-
-        
         // WhatsApp form handler
         document.getElementById('orderForm').addEventListener('submit', function(e) {
             e.preventDefault();
@@ -451,15 +439,18 @@
             const address = document.getElementById('address').value;
             const message = document.getElementById('message').value;
             
+            // Format pesan WhatsApp
             const whatsappMessage = `Halo, saya ingin memesan keripik tempe:%0A%0ANama: ${encodeURIComponent(name)}%0ANo. HP: ${encodeURIComponent(phone)}%0AAlamat: ${encodeURIComponent(address)}%0APesanan: ${encodeURIComponent(message)}`;
             
-            const whatsappNumber = '081264676310';
+            // Nomor WhatsApp tujuan
+            const whatsappNumber = '6281264676310'; // Format internasional (62 untuk Indonesia)
             const whatsappURL = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
             
+            // Buka WhatsApp di tab baru
             window.open(whatsappURL, '_blank');
         });
 
-        // Smooth scrolling
+        // Smooth scrolling untuk navigasi
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
